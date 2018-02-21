@@ -1,6 +1,7 @@
 module.exports = {
   availableExtensions: new Set([
     'decorateBrowserOptions',
+    'decorateCommands',
     'decorateConfig',
     'decorateEnv',
     'decorateHeader',

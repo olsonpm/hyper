@@ -12,7 +12,7 @@ const notify = require('../notify');
 const fetchNotifications = require('../notifications');
 const Session = require('../session');
 const contextMenuTemplate = require('./contextmenu');
-const {execCommand} = require('../commands');
+const {execCommand} = require('../plugins');
 
 module.exports = class Window {
   constructor(options_, cfg, fn) {

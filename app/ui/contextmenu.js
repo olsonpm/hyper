@@ -1,7 +1,6 @@
 const editMenu = require('../menus/menus/edit');
 const shellMenu = require('../menus/menus/shell');
-const {execCommand} = require('../commands');
-const {getDecoratedKeymaps} = require('../plugins');
+const {execCommand, getDecoratedKeymaps} = require('../plugins');
 const separator = {type: 'separator'};
 
 const getCommandKeys = keymaps =>

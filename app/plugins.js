@@ -10,6 +10,7 @@ const {availableExtensions} = require('./plugins/extensions');
 const {install} = require('./plugins/install');
 const {plugs} = require('./config/paths');
 const mapKeys = require('./utils/map-keys');
+const {buildCommands} = require('./commands');
 
 // local storage
 const cache = new Config();
@@ -22,6 +23,7 @@ let plugins = config.getPlugins();
 let paths = getPaths();
 let id = getId(plugins);
 let modules = requirePlugins();
+let decoratedCommands = getDecoratedCommands();
 
 function getId(plugins_) {
   return JSON.stringify(plugins_);
@@ -80,6 +82,8 @@ function updatePlugins({force = false} = {}) {
       // cache modules
       modules = requirePlugins();
 
+      decoratedCommands = getDecoratedCommands();
+
       const loaded = modules.length;
       const total = paths.plugins.length + paths.localPlugins.length;
       const pluginVersions = JSON.stringify(getPluginVersions());
@@ -128,6 +132,10 @@ function clearCache() {
       delete require.cache[entry];
     }
   }
+}
+
+function getDecoratedCommands() {
+  return decorateObject(buildCommands(), 'decorateCommands');
 }
 
 exports.updatePlugins = updatePlugins;
@@ -370,3 +378,8 @@ exports.getDecoratedBrowserOptions = defaults => {
 };
 
 exports._toDependencies = toDependencies;
+
+exports.execCommand = (command, focusedWindow) => {
+  const fn = decoratedCommands[command];
+  if (fn) fn(focusedWindow);
+};

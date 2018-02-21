@@ -11,8 +11,7 @@ const pluginsMenu = require('./menus/plugins');
 const windowMenu = require('./menus/window');
 const helpMenu = require('./menus/help');
 const darwinMenu = require('./menus/darwin');
-const {getDecoratedKeymaps} = require('../plugins');
-const {execCommand} = require('../commands');
+const {execCommand, getDecoratedKeymaps} = require('../plugins');
 
 const appName = app.getName();
 const appVersion = app.getVersion();
